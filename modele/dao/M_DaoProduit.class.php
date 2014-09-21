@@ -1,14 +1,14 @@
 <?php
 
-class DaoProduit implements DaoInterface {
+class M_DaoProduit implements M_DaoInterface {
 
     public static function enregistrementVersObjet($enreg) {
         // récupération de l'objet Categorie d'après son code
         $codeCateg=   $enreg['pdt_categorie'];
-        $pdo = DaoConnexion::connecter();
-        $uneCateg = DaoCategorie::getOneById($pdo, $codeCateg);
-        DaoConnexion::deconnecter($pdo);
-        $retour = new Produit($enreg['pdt_ref'], $enreg['pdt_designation'], $enreg['pdt_prix'], $enreg['pdt_image'], $uneCateg );
+        $pdo = M_DaoConnexion::connecter();
+        $uneCateg = M_DaoCategorie::getOneById($pdo, $codeCateg);
+        M_DaoConnexion::deconnecter($pdo);
+        $retour = new M_Produit($enreg['pdt_ref'], $enreg['pdt_designation'], $enreg['pdt_prix'], $enreg['pdt_image'], $uneCateg );
         return $retour;        
     }
 

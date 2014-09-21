@@ -1,9 +1,9 @@
 <?php
 
-class DaoCategorie implements DaoInterface {
+class M_DaoCategorie implements M_DaoInterface {
         
     public static function enregistrementVersObjet($unEnregistrement) {
-        $retour = new Categorie($unEnregistrement['cat_code'], $unEnregistrement['cat_libelle']);
+        $retour = new M_Categorie($unEnregistrement['cat_code'], $unEnregistrement['cat_libelle']);
         return $retour;        
     }
 

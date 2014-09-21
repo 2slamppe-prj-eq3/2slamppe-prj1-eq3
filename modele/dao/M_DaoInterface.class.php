@@ -1,6 +1,6 @@
 <?php
 
-interface DaoInterface {
+interface M_DaoInterface {
 
     /**
      * Lire tous les enregistrements d'une table

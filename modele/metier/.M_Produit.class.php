@@ -5,7 +5,8 @@
  *
  * @author btssio
  */
-class Produit {
+
+class M_Produit {
 /*
   `pdt_ref` char(3) NOT NULL DEFAULT '',
   `pdt_designation` varchar(50) NOT NULL DEFAULT '',

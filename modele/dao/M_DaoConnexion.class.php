@@ -9,7 +9,7 @@ define('DSN', 'mysql:host=localhost;dbname=baselafleur');
 define('USER', 'root');
 define('MDP', 'joliverie');
 
-class DaoConnexion {
+class M_DaoConnexion {
 
     /**
      * Crée un objet de type PDO et ouvre la connexion 

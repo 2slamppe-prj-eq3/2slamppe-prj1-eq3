@@ -4,7 +4,7 @@
  *
  * @author btssio
  */
-class Categorie {
+class M_Categorie {
     private $code;
     private $libelle;
     
