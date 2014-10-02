@@ -36,36 +36,23 @@ class C_AdminPersonnes extends C_ControleurGenerique {
     function validationcreerPersonne(){
         
         $this->vue = new V_Vue("../vues/templates/template.inc.php");
-        $this->vue->ecrireDonnee('titreVue', "'Validation cr&eacute;ation de l'utilisateur'");
+        $this->vue->ecrireDonnee('titreVue', "'centreValidationPersonne'");
         // connection à la BDD
-        
-        //récupération données utilisateur
-//        $id;
-//        $utilisateur->setId($_POST["id"]);
-        /*$utilisateur->setSpecialite($_POST["option"]);  
-        $utilisateur->setRole($role);
-        $utilisateur->setCivilite($_POST["civilite"]);
-        $utilisateur->setNom($_POST["nom"]);
-        $utilisateur->setPrenom($_POST["prenom"]);
-        $utilisateur->setNumTel($_POST["tel"]);
-        $utilisateur->setMail($_POST["mail"]);
-        $utilisateur->setMobile($_POST["telP"]);
-        $utilisateur->setEtudes($_POST["etudes"]);
-        $utilisateur->setFormation($_POST["formation"]);
-        $utilisateur->setLogin($_POST["login"]);
-        $utilisateur->setMdp($_POST["mdp"]);
-        $nomTable = "PERSONNE";
-        $ok = $daoPers->insert($nomTable, $utilisateur);*/
         
         $idRole = $_POST["role"];
         $role = new M_Role(null, null, null);
-        
         $daoRole = new M_DaoRole();
         $daoRole->connecter();
         $pdo = $daoRole->getPdo();
         $role= $daoRole->selectOne($idRole);
         
-        $specialite = $_POST["option"];
+        $idSpecialite = $_POST["option"];
+        $specialite = new M_Specialite(null, null, null);
+        $daoSpecialite = new M_DaoSpecialite();
+        $daoSpecialite->connecter();
+        $pdo = $daoSpecialite->getPdo();
+        $specialite= $daoSpecialite->selectOne($idSpecialite);
+        
         $civilite = $_POST["civilite"];
         $nom = $_POST["nom"];
         $prenom = $_POST["prenom"];
@@ -82,7 +69,16 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         $daoPers = new M_DaoPersonne();
         $daoPers->connecter();
         $pdo = $daoPers->getPdo();
-        $daoPers ->insert($unePersonne);
+        $ok = $daoPers ->insert($unePersonne);
+        
+        if ($ok) {
+            $this->vue->ecrireDonnee('centre',"../vues/includes/utilisateur/centreValidationPersonne.php");
+        } else {
+            $this->vue->ecrireDonnee('centre',"Echec des modifications");
+        }
+        $this->vue->afficher();
+
+        
         
     
     }
