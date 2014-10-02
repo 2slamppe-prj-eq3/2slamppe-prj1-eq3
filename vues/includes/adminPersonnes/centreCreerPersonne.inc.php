@@ -69,7 +69,7 @@
                 <?
 //création du contenu du select pour les spécialités des étudiants
                 foreach ($this->lireDonnee('lesSpecialites') as $spe) {
-                    echo'<option value="' . $spe->getId() . '">' . $spe->getLibelleCourt() . '</option>'; //echo de la ligne 
+                    echo'<option value="' . $spe->getId() . '">' . $spe->getLibellecCourt() . '</option>'; //echo de la ligne 
                 }
                 ?>
             </select>
@@ -120,7 +120,7 @@
 
     </fieldset>
     <fieldset>
-        <input type="submit" value="Creer" onclick="return valider()"></input><!-- OnClick éxécutera le JS qui testera tout les champ du formulaire. -->
+        <input type="submit" value="Creer" onclick="return valider()" action = "../vues/includes/utilisateur/centreValidationPersonne.php"></input><!-- OnClick éxécutera le JS qui testera tout les champ du formulaire. -->
         <input type="button" value="Retour" onclick="history.go(-1)">
     </fieldset>
 </form>
