@@ -36,7 +36,7 @@ class C_AdminPersonnes extends C_ControleurGenerique {
     function validationcreerPersonne(){
         
         $this->vue = new V_Vue("../vues/templates/template.inc.php");
-        $this->vue->ecrireDonnee('titreVue', "'centreValidationPersonne'");
+        $this->vue->ecrireDonnee('titreVue', "../vues/includes/utilisateur/centreValidationPersonne.php");
         // connection à la BDD
         
         $idRole = $_POST["role"];
@@ -46,6 +46,7 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         $pdo = $daoRole->getPdo();
         $role= $daoRole->selectOne($idRole);
         
+        // récupération de la spécialité
         $idSpecialite = $_POST["option"];
         $specialite = new M_Specialite(null, null, null);
         $daoSpecialite = new M_DaoSpecialite();
@@ -53,6 +54,8 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         $pdo = $daoSpecialite->getPdo();
         $specialite= $daoSpecialite->selectOne($idSpecialite);
         
+        
+        // création de la personne
         $civilite = $_POST["civilite"];
         $nom = $_POST["nom"];
         $prenom = $_POST["prenom"];
@@ -64,18 +67,21 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         $login = $_POST["login"];
         $mdp = $_POST["mdp"];
         
+        //assemblage de la personne
         $unePersonne = new M_Personne(null, $specialite, $role, $civilite, $nom, $prenom, $numTel, $mail, $mobile, $etudes, $formation, $login, $mdp);
         
         $daoPers = new M_DaoPersonne();
         $daoPers->connecter();
         $pdo = $daoPers->getPdo();
-        $ok = $daoPers ->insert($unePersonne);
+        $ok = $daoPers ->insert($unePersonne); // insertion à la base de données
         
         if ($ok) {
             $this->vue->ecrireDonnee('centre',"../vues/includes/utilisateur/centreValidationPersonne.php");
         } else {
             $this->vue->ecrireDonnee('centre',"Echec des modifications");
         }
+        
+        $this->vue->ecrireDonnee('loginAuthentification',MaSession::get('login'));
         $this->vue->afficher();
 
         

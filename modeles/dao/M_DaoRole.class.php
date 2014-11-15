@@ -42,7 +42,31 @@ class M_DaoRole extends M_DaoGenerique {
     public function update($idMetier, $objetMetier) {
         return FALSE;
     }
+    
+    public function selectOne($idRole){
+        $retour = null;
+        // Requête textuelle
+        try {
+            $sql = "SELECT * FROM $this->nomTable WHERE idrole=".$idRole;
+            
+            // préparer la requête PDO
+            $queryPrepare = $this->pdo->prepare($sql);
+            // exécuter la requête PDO
+            if ($queryPrepare->execute(array(':id' =>  $idRole))) {
+                
+                $enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC);
+                // construire l'objet métier correspondant
+                $retour = $this->enregistrementVersObjet($enregistrement);
+            }
+            
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $retour;
+    }
+        
+    }
 
-}
+
 
 

@@ -12,6 +12,7 @@ class V_Vue {
         $this->donnees['entete'] = "../vues/templates/entete.inc.php";
         $this->donnees['gauche'] = "../vues/templates/gauche.inc.php";
         $this->donnees['pied'] = "../vues/templates/pied.inc.php";
+//        $this->donnees['centre'] = "../vues/includes/utilisateur/centreValidationPersonne.php";
     }
 
     function afficher() {

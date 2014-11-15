@@ -7,7 +7,8 @@ class M_DaoSpecialite extends M_DaoGenerique {
         $this->nomTable = "SPECIALITE";
         $this->nomClefPrimaire = "IDSPECIALITE";
     }
-
+    
+    
     /**
      * Redéfinition de la méthode abstraite de M_DaoGenerique
      * Permet d'instancier un objet d'après les valeurs d'un enregistrement lu dans la base de données
@@ -42,7 +43,28 @@ class M_DaoSpecialite extends M_DaoGenerique {
     public function update($idMetier, $objetMetier) {
         return FALSE;
     }
-
+    
+    public function selectOne($idSpecialite){
+        $retour = null;
+        // Requête textuelle
+        try {
+            $sql = "SELECT * FROM $this->nomTable WHERE idSpecialite=".$idSpecialite;
+            
+            // préparer la requête PDO
+            $queryPrepare = $this->pdo->prepare($sql);
+            // exécuter la requête PDO
+            if ($queryPrepare->execute(array(':id' =>  $idSpecialite))) {
+                
+                $enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC);
+                // construire l'objet métier correspondant
+                $retour = $this->enregistrementVersObjet($enregistrement);
+            }
+            
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $retour;
+    }
 }
 
 
