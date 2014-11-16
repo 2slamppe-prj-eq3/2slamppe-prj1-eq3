@@ -29,7 +29,7 @@
             echo "<li><a href=\".?controleur=utilisateur&action=creerEntreprise\">-Ajouter une entreprise</a></li>";
             echo "<li><a href=\".?controleur=utilisateur&action=MajEntreprise\">-M.A.J entreprise</a></li>";
             echo "<hr>";
-            echo "<li><a href=\".?controleur=utilisateur&action=ajoutStage\">-Ajouter un stage</a></li>";
+            echo "<li><a href=\".?controleur=stage&action=ajouterUnStage\">-Ajouter un stage</a></li>";
             echo "<li><a href=\".?controleur=utilisateur&action=afficheListeStage\">-Liste des stages</a></li>";
             echo "<hr>";
         }
